@@ -17,15 +17,20 @@ public class EmployeeService {
     private final int LIMIT = 10;
     private final Map<Integer, Employee> emp1 = new HashMap<>();
 
+    private int getKey (int passport){
+        return passport;
+    }
+
     public Employee addEmployee(String firstName, String lastName, Integer passport,
                                 Integer department, Double salary) {
         checkAlpha(firstName, lastName);
+        int key = getKey(passport);
         Employee emp = new Employee(firstName, lastName, passport, department, salary);
-        if (emp1.containsKey(passport)) {
+        if (emp1.containsKey(key)) {
             throw new EmployeeAlreadyAddedException();
         }
         if (emp1.size() < LIMIT) {
-            emp1.put(emp.getPassport(), emp);
+            emp1.put(key, emp);
             return emp;
         }
         throw new EmployeeStorageIsFullException();
@@ -34,22 +39,21 @@ public class EmployeeService {
     public Employee deleteEmployee(String firstName, String lastName, Integer passport,
                                    Integer department, Double salary) {
         checkAlpha(firstName, lastName);
-        Employee emp = new Employee(firstName, lastName, passport, department, salary);
-        if (!emp1.containsKey(emp.getPassport())) {
+        int key = getKey(passport);
+        if (!emp1.containsKey(key)) {
             throw new EmployeeNotFoundException();
         }
-        emp1.remove(emp);
-        return emp;
+        return emp1.remove(key);
     }
 
     public Employee findEmployee(String firstName, String lastName, Integer passport,
                                  Integer department, Double salary) {
         checkAlpha(firstName, lastName);
-        Employee emp = new Employee(firstName, lastName,passport, department, salary);
+        int key = getKey(passport);
         if (emp1 == null){
             throw new EmployeeNotFoundException();
         }
-        return emp;
+        return emp1.get(key);
     }
     public List<Employee> getAll (){
         return new ArrayList<>(emp1.values());
