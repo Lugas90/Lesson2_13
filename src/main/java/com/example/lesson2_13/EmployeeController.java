@@ -15,6 +15,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @RequestMapping(path = "/all")
+    public List<Employee> getAll() {
+        return employeeService.getAll();
+    }
+
     @RequestMapping("/add")
     public Employee addEmployee(@RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
@@ -40,11 +45,6 @@ public class EmployeeController {
                                  @RequestParam("department") Integer department,
                                  @RequestParam("salary") Double salary) {
         return employeeService.findEmployee(firstName, lastName, passport, department, salary);
-    }
-
-    @RequestMapping(path = "/all")
-    public List<Employee> getAll() {
-        return employeeService.getAll();
     }
 }
 
