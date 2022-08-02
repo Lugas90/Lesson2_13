@@ -31,22 +31,23 @@ public class DepartmentServiceTest {
     @Test
     public void shouldReturnGetAllDepart() {
         Mockito.when(employeeService.getAll()).thenReturn(employees);
-        List <Employee> expected = departmentService.allInDepartment(1);
+        List <Employee> expected = new ArrayList<>(List.of(
+                new Employee(FIRSTNAME1, LASTNAME1, PASSPORT1, DEPARTMENT1, SALARY1),
+                new Employee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT1, SALARY2)));
         Assertions.assertEquals(expected, departmentService.allInDepartment(1));
     }
 
     @Test
     public void shouldReturnDepartMaxSalary (){
         Mockito.when(employeeService.getAll()).thenReturn(employees);
-        Employee expected = departmentService.departMaxSalary(1);
+        Employee expected = new Employee(FIRSTNAME1, LASTNAME1, PASSPORT1, DEPARTMENT1, SALARY1);
         Assertions.assertEquals(expected, departmentService.departMaxSalary(1));
     }
 
     @Test
     public void shouldReturnDepartMinSalary (){
         Mockito.when(employeeService.getAll()).thenReturn(employees);
-        Employee expected = departmentService.departMinSalary(2);
+        Employee expected = new Employee(FIRSTNAME3, LASTNAME3, PASSPORT3, DEPARTMENT2, SALARY3);
         Assertions.assertEquals(expected, departmentService.departMinSalary(2));
     }
-
 }
