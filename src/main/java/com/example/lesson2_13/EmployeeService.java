@@ -50,7 +50,7 @@ public class EmployeeService {
                                  Integer department, Double salary) {
         checkAlpha(firstName, lastName);
         int key = getKey(passport);
-        if (emp1 == null){
+        if (!emp1.containsKey(key)){
             throw new EmployeeNotFoundException();
         }
         return emp1.get(key);

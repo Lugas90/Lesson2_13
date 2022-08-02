@@ -35,8 +35,8 @@ public class EmployeeServiceTest {
         Employee expected = null;
         out.addEmployee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT2, SALARY2);
         out.deleteEmployee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT2, SALARY2);
-        Employee actual = out.findEmployee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT2, SALARY2);
-       Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(EmployeeNotFoundException.class,
+                () -> out.findEmployee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT2, SALARY2));
     }
 
     @Test
@@ -47,13 +47,6 @@ public class EmployeeServiceTest {
                 () -> out.deleteEmployee(FIRSTNAME2, LASTNAME2, PASSPORT2, DEPARTMENT2, SALARY2));
     }
 
-    @Test
-    public void shouldReturnFindEmployee() {
-        Employee expected = new Employee(FIRSTNAME1, LASTNAME1, PASSPORT1, DEPARTMENT1, SALARY1);
-        out.addEmployee(FIRSTNAME1, LASTNAME1, PASSPORT1, DEPARTMENT1, SALARY1);
-        Employee actual = out.findEmployee(FIRSTNAME1, LASTNAME1, PASSPORT1, DEPARTMENT1, SALARY1);
-        Assertions.assertEquals(expected, actual);
-    }
 
     @Test
     public void shouldReturnGetAllEmployee() {
